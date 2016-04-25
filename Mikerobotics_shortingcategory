@@ -1,0 +1,56 @@
+library(plyr)
+library (stringr)
+#import the file
+datasetforinterns <- read.delim(file.choose())
+#category and timewise columns 
+ct<-data.frame(Category=datasetforinterns$category,Time=datasetforinterns$Time,Statements=datasetforinterns$final)
+#unipue of categories
+p=unique(ct[,1])
+z=length(p)#no. of categories
+
+#subsets of each category 
+bar1 =subset(ct,Category==p[1])
+bar2 =subset(ct,Category==p[2])
+bar3 =subset(ct,Category==p[3])
+bar4 =subset(ct,Category==p[4])
+bar5 =subset(ct,Category==p[5])
+bar6 =subset(ct,Category==p[6])
+bar7 =subset(ct,Category==p[7])
+bar8 =subset(ct,Category==p[8])
+bar9 =subset(ct,Category==p[9])
+bar10 =subset(ct,Category==p[10])
+bar11=subset(ct,Category==p[11])
+bar12=subset(ct,Category==p[12])
+#saving each category file in csv
+write.csv(bar1,"result1.csv")
+write.csv(bar2,"result12.csv")
+write.csv(bar3,"result3.csv")
+write.csv(bar4,"result4.csv")
+write.csv(bar5,"result5.csv")
+write.csv(bar6,"result6.csv")
+write.csv(bar7,"result7.csv")
+write.csv(bar8,"result8.csv")
+write.csv(bar9,"result9.csv")
+write.csv(bar10,"result10.csv")
+write.csv(bar11,"result11.csv")
+write.csv(bar12,"result12.csv")
+# saving file as whole or all categories in one file
+n <-max(length(bar1[,1]),length(bar2[,1]),length(bar3[,1]),length(bar4[,1]),length(bar5[,1]),length(bar6[,1]),length(bar12[,1]),length(bar11[,1]),length(bar10[,1]),length(bar7[,1]),length(bar8[,1]),length(bar9[,1]))
+length(bar1)=n
+length(bar2)=n
+length(bar3)=n
+length(bar4)=n
+length(bar5)=n
+length(bar6)=n
+length(bar7)=n
+length(bar8)=n
+length(bar9)=n
+length(bar10)=n
+length(bar11)=n
+length(bar12)=n
+file_names = list.files(getwd())
+file_names = file_names[grepl(".csv",file_names)]
+files = lapply(file_names, read.csv, header=F, stringsAsFactors = F)
+files = do.call(rbind,files)
+write.csv(files,"final_report.csv")
+
